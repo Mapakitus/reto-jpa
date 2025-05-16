@@ -8,11 +8,11 @@
 
 - Crea una entidad llamada Proyecto. La entidad debe tener los siguientes atributos:
 
-    Un identificador único (id) de tipo Long que sea la clave primaria y se genere automáticamente
-    Un nombre (nombre) de tipo String
-    Una descripción (descripcion) de tipo String
-    Una fecha de inicio (fechaInicio) de tipo LocalDate
-    Si el proyecto está activo o no (activo)
+    - Un identificador único (id) de tipo Long que sea la clave primaria y se genere automáticamente
+    - Un nombre (nombre) de tipo String
+    - Una descripción (descripcion) de tipo String
+    - Una fecha de inicio (fechaInicio) de tipo LocalDate
+    - Si el proyecto está activo o no (activo)
 
 - Crea una entidad llamada Tarea. La entidad debe tener los siguientes atributos:
 
