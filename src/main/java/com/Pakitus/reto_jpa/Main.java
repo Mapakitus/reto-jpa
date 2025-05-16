@@ -41,45 +41,51 @@ public class Main {
 		//Guardar las tareas en la base de datos
 		tareaRepository.saveAll(List.of(tarea1, tarea2, tarea3, tarea4, tarea5));
 
-		System.out.println("Proyectos guardados: " + proyectoRepository.findAll());
-
-		System.out.println("Tareas guardadas: " + tareaRepository.findAll());
 
 		//Probar List<Proyecto> findByNombreIgnoreCase(String nombre);
 		String nombreBuscado = "MÉTODOS DERIVADOS";
 		List<Proyecto> proyectosEncontrados = proyectoRepository.findByNombreIgnoreCase(nombreBuscado);
-		if (proyectosEncontrados != null) {
-			System.out.println("Proyectos encontrados por nombre '" + nombreBuscado + "': " + proyectosEncontrados);
-		} else {
-			System.out.println("No se encontró ningún proyecto con el nombre: " + nombreBuscado);
+		if (proyectosEncontrados.isEmpty()) {
+			System.out.println("No se encontró ningún proyecto con el nombre: " + nombreBuscado);		}
+		else {
+			for (Proyecto proyecto : proyectosEncontrados) {
+				System.out.println("Proyectos encontrados por nombre '" + nombreBuscado + "': " + proyecto.getNombre());
+			}
 		}
 
 		//Probar List<Proyecto> findByFechaInicio(LocalDate fechaInicio);
 		LocalDate fechaBuscada = LocalDate.of(2025, 5, 10);
 		List<Proyecto> proyectosPorFecha = proyectoRepository.findByFechaInicio(fechaBuscada);
-		if (proyectosPorFecha != null) {
-			System.out.println("Proyectos encontrados por fecha '" + fechaBuscada + "': " + proyectosPorFecha);
+		System.out.println("Proyectos con fecha de inicio: " + fechaBuscada);
+		if (proyectosPorFecha.isEmpty()) {
+			System.out.println("No se encontró ningún proyecto con fecha de inicio: " + fechaBuscada);
 		} else {
-			System.out.println("No se encontró ningún proyecto con la fecha: " + fechaBuscada);
+			for (Proyecto proyecto : proyectosPorFecha) {
+				System.out.println(proyecto.getNombre() + ": " + proyecto.getDescripcion());
+			}
 		}
 
 		//Probar @Query("select p from Proyecto p where p.activo = true")
 		//    List<Proyecto> findByActivoTrue();
-		Boolean activoBuscado = true;
 		List<Proyecto> proyectosActivos = proyectoRepository.findByActivoTrue();
-		if (proyectosActivos != null) {
-			System.out.println("Proyectos activos: " + proyectosActivos);
+		System.out.println("Proyectos activos: ");
+		if (proyectosActivos.isEmpty()) {
+			System.out.println("No se han encontrado proyectos activos");
 		} else {
-			System.out.println("No se encontró ningún proyecto activo");
+			for (Proyecto proyecto : proyectosActivos) {
+				System.out.println(proyecto.getNombre() + ": " + proyecto.getDescripcion());
+			}
 		}
 
 		//Probar List<Tarea> findByTituloIgnoreCase(String titulo);
 		String tituloBuscado = "Crear un método findByNombre";
 		List<Tarea> tareasEncontradas = tareaRepository.findByTituloIgnoreCase(tituloBuscado);
-		if (tareasEncontradas != null) {
-			System.out.println("Tareas encontradas por título '" + tituloBuscado + "': " + tareasEncontradas);
-		} else {
+		if (tareasEncontradas.isEmpty()) {
 			System.out.println("No se encontró ninguna tarea con el título: " + tituloBuscado);
+		} else {
+			for (Tarea tarea : tareasEncontradas) {
+				System.out.println("Tareas encontradas por título '" + tituloBuscado + "': " + tarea.getTitulo());
+			}
 		}
 
 		//Probar long countByCompletadaFalse();
@@ -88,12 +94,16 @@ public class Main {
 
 		//Probar @Query("select t from Tarea t where upper(t.proyecto.nombre) = upper(?1)")
 		//    List<Tarea> findByProyecto_NombreIgnoreCase(String nombre);
-		String nombreProyectoBuscado = "Métodos Derivados";
-		List<Tarea> tareasPorProyecto = tareaRepository.findByProyecto_NombreIgnoreCase(nombreProyectoBuscado);
-		if (tareasPorProyecto != null) {
-			System.out.println("Tareas encontradas por proyecto '" + nombreProyectoBuscado + "': " + tareasPorProyecto);
+		Long proyectoId = proyecto2.getId();
+		List<Tarea> tareasProyecto = tareaRepository.findByProyecto_Id(proyectoId);
+		if (tareasProyecto.isEmpty()) {
+			System.out.println("El proyecto con id " + proyectoId + " no tiene tareas.");
 		} else {
-			System.out.println("No se encontró ninguna tarea con el proyecto: " + nombreProyectoBuscado);
+			System.out.println("Tareas del proyecto con id " + proyectoId + ":");
+			for (Tarea tarea : tareasProyecto) {
+				System.out.println(tarea.getTitulo() + ": " +
+						(tarea.getCompletada() ? "Completada" : "No completada"));
+			}
 		}
 
 	}
