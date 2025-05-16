@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "proyecto") //Personaliza el nombre de la tabla
+@Table(name = "proyectos") //Personaliza el nombre de la tabla
 public class Proyecto {
 
     @Id // indica que este atributo es la clave primaria
