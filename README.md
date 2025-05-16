@@ -14,7 +14,7 @@
     Una fecha de inicio (fechaInicio) de tipo LocalDate
     Si el proyecto está activo o no (activo)
 
-  - Crea una entidad llamada Tarea. La entidad debe tener los siguientes atributos:
+- Crea una entidad llamada Tarea. La entidad debe tener los siguientes atributos:
 
     Un identificador único (id) de tipo Long que sea la clave primaria y se genere automáticamente
     Un título (titulo) de tipo String
@@ -22,7 +22,7 @@
     Si la tarea está completada o no (completada)
     Una referencia al proyecto al que pertenece (proyecto) que establezca la relación ManyToOne
     
-  - Asegúrate de:
+- Asegúrate de:
     
      Usar las anotaciones de JPA adecuadas para definir la entidad y sus propiedades
      Configurar correctamente la relación ManyToOne con la entidad Proyecto
